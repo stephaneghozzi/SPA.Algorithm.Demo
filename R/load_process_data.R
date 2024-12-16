@@ -76,12 +76,13 @@ load_process_data <- function(
       values_to = disease_score_col_name
     )
 
-  scores <- list(
+  spa_individual_scores <- list(
     country_score = country_score,
     dis_surv_score = dis_surv_score,
     feat_obj_surv_score = feat_obj_surv_score
   )
 
-  return(scores)
+  return(spa_individual_scores)
 
 }
+

@@ -3,24 +3,25 @@
 # objective_feature <- "Can monitor zoonotic disease over time"
 
 compile_specific_scores <- function(
-  scores,
-  country, disease, objective_feature,
+  spa_individual_scores,
+  country, disease, objective_feature
   # country_col_name, disease_col_name, feat_obj_col_name,
   # surveillance_approach_col_name
 ) {
 
-  cs <- scores$country_score[
-    scores$country_score[[country_col_name]] == country,
+  cs <- spa_individual_scores$country_score[
+    spa_individual_scores$country_score[[country_col_name]] == country,
   ]
   cs[[country_col_name]] <- NULL
 
-  ds <- scores$dis_surv_score[
-    scores$dis_surv_score[[disease_col_name]] == disease,
+  ds <- spa_individual_scores$dis_surv_score[
+    spa_individual_scores$dis_surv_score[[disease_col_name]] == disease,
   ]
   ds[[disease_col_name]] <- NULL
 
-  ofs <- scores$feat_obj_surv_score[
-    scores$feat_obj_surv_score[[feat_obj_col_name]] == objective_feature,
+  ofs <- spa_individual_scores$feat_obj_surv_score[
+    spa_individual_scores$feat_obj_surv_score[[feat_obj_col_name]] ==
+      objective_feature,
   ]
   ofs[[feat_obj_col_name]] <- NULL
 

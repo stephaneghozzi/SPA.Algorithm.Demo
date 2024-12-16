@@ -1,6 +1,6 @@
 compute_surv_scores <- function(
   specific_scores,
-  score_weights,
+  score_weights
   # context_score_weights
   # country_score_col_name, disease_score_col_name, feat_obj_score_col_name,
   # surveillance_approach_col_name
@@ -35,10 +35,6 @@ compute_surv_scores <- function(
       `Score surveillance approach 1` = prod(score_value ^ weight_value) / exp(sum(weight_value)),
       `Score surveillance approach 2` = sum(score_value * weight_value) / sum(weight_value),
       .groups = "drop"
-    ) |>
-    dplyr::arrange(
-      surveillance_approach_col_name,
-      dplyr::desc(`Score surveillance approach 1`)
     ) |>
     dplyr::left_join(specific_scores, by = surveillance_approach_col_name)
 
