@@ -32,9 +32,22 @@ compute_surv_scores <- function(
       )
     ) |>
     dplyr::summarize(
-      `Score surveillance approach 1` = prod(score_value ^ weight_value) / exp(sum(weight_value)),
-      `Score surveillance approach 2` = sum(score_value * weight_value) / sum(weight_value),
+      `Score surveillance approach 1` = prod(score_value ^ weight_value) /
+        exp(sum(weight_value)),
+      `Score surveillance approach 2` = sum(score_value * weight_value) /
+        sum(weight_value),
       .groups = "drop"
+    ) |>
+    dplyr::mutate(
+      `Rank 1` = rank(-`Score surveillance approach 1`, ties.method = "first"),
+      `Rank 2` = rank(-`Score surveillance approach 2`, ties.method = "first"),
+    ) |>
+    dplyr::relocate(
+      dplyr::all_of(
+        c(surveillance_approach_col_name, "Rank 1",
+          "Score surveillance approach 1", "Rank 2",
+          "Score surveillance approach 2")
+      )
     ) |>
     dplyr::left_join(specific_scores, by = surveillance_approach_col_name)
 

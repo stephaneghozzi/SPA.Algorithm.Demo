@@ -52,8 +52,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
     compute_surv_scores(specific_scores(), score_weights)
   })
 
-  # Display the scores in a table
-  output$score_table <- DT::renderDT(
+  surv_scores_display <- shiny::reactive({
     surv_scores() |>
       dplyr::mutate(
         dplyr::across(dplyr::where(is.numeric), ~ signif(.x, 2))
@@ -61,12 +60,33 @@ spa_algorithm_demo_server <- function(input, output, session) {
       dplyr::arrange(
         surveillance_approach_col_name,
         dplyr::desc(`Score surveillance approach 1`)
-      ),
-    rownames = FALSE,
-    options = list(
-      pageLength = nrow(surv_scores()),
-      dom = "ft"
-    )
-  )
+      )
+  })
+
+  # Display the scores in a table
+  output$score_table <- DT::renderDT({
+
+    DT::datatable(
+      surv_scores_display(),
+      rownames = FALSE,
+      options = list(
+        pageLength = nrow(surv_scores()),
+        dom = "ft"
+      )
+    ) |>
+      DT::formatStyle(
+        c(surveillance_approach_col_name, "Rank 1", "Rank 2"),
+        fontWeight = "bold"
+      ) |>
+      DT::formatStyle(
+        names(surv_scores())[
+          !names(surv_scores()) %in% c(surveillance_approach_col_name,
+            "Score surveillance approach 1", "Score surveillance approach 2",
+            "Rank 1", "Rank 2")
+        ],
+        color = "DarkGrey"
+      )
+  })
+
 
 }

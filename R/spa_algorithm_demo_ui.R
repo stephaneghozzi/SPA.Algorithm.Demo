@@ -29,6 +29,26 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
   ),
 
-  DT::dataTableOutput("score_table")
+  bslib::navset_card_underline(
+
+    header = htmltools::hr(),
+    footer = htmltools::hr(),
+
+    bslib::nav_panel(
+      title = "Scores",
+      DT::dataTableOutput("score_table")
+    ),
+
+    bslib::nav_panel(
+      title = "Data",
+      htmltools::p("Raw and processed data.")
+    ),
+
+    bslib::nav_panel(
+      title = "About",
+      htmltools::p("This a demo application illustrating the SPA algorithm.")
+    )
+
+  )
 
 )
