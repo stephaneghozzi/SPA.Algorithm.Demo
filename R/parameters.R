@@ -13,7 +13,7 @@ file_paths <- list(
 
 # Column names
 feat_obj_col_name <- "System features / Surveillance objectives"
-feat_obj_score_col_name <- "Score objective / feature"
+feat_obj_score_col_name <- "Score feature / objective"
 disease_col_name <- "Disease"
 disease_score_col_name <- "Score disease"
 country_col_name <- "COUNTRY"
@@ -36,5 +36,5 @@ context_score_weights <- list(
 score_weights <- list(
   `Score country` = 1.,
   `Score disease` = 1.,
-  `Score objective / feature` = 1.
+  `Score feature / objective` = 1.
 )

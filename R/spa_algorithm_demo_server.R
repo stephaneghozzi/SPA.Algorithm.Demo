@@ -48,8 +48,16 @@ spa_algorithm_demo_server <- function(input, output, session) {
     input$country, input$disease, input$feature_objective)
   })
 
+  score_weights_input <- shiny::reactive({
+    list(
+      `Score country` = input$weight_country,
+      `Score disease` = input$weight_disease,
+      `Score feature / objective` = input$weight_feature_objective
+    )
+  })
+
   surv_scores <- shiny::reactive({
-    compute_surv_scores(specific_scores(), score_weights)
+    compute_surv_scores(specific_scores(), score_weights_input())
   })
 
   surv_scores_display <- shiny::reactive({
@@ -88,5 +96,20 @@ spa_algorithm_demo_server <- function(input, output, session) {
       )
   })
 
+  # Get original data sets for download
+  output$original_data_Set <- downloadHandler(
+
+    filename <- "spa_original_data_set.zip",
+
+    content <- function(file) {
+      zip::zip(
+        file,
+        files = c(file_paths$context_country, file_paths$context_surv,
+          file_paths$dis_surv, file_paths$feat_obj_surv)
+      )
+    },
+
+    contentType = "application/zip"
+  )
 
 }
