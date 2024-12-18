@@ -107,8 +107,12 @@ spa_algorithm_demo_server <- function(input, output, session) {
     content <- function(file) {
       zip::zip(
         file,
-        files = c(file_paths$context_country, file_paths$context_surv,
-          file_paths$dis_surv, file_paths$feat_obj_surv)
+        files = dir(
+          system.file("extdata", package = "SPA.Algorithm.Demo"),
+          full.names = TRUE
+        ),
+        # include_directories = FALSE,
+        mode = "cherry-pick"
       )
     },
 

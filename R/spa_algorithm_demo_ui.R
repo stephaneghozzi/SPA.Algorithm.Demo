@@ -12,7 +12,7 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
     shiny::helpText(
       "Select by clicking the dropdown menu or typing keywords to filter the",
-      "list."
+      "list. A random set is selected when loading the page."
     ),
 
     shiny::selectInput(
