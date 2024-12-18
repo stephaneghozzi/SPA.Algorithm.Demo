@@ -13,6 +13,7 @@ License: MIT + file LICENSE
 Imports: 
     dplyr,
     DT,
+    htmlwidgets,
     readxl,
     shiny,
     stringr,
