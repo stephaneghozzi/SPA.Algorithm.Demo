@@ -3,12 +3,12 @@ max_feat_obj_surv <- 3
 
 # Paths to raw data
 file_paths <- list(
-  context_country = "data/Contextual Computation V0.3 - Live Version.xlsx",
+  context_country = "inst/extdata/Contextual Computation V0.3 - Live Version.xlsx",
   context_country_sheet = "Contextual Algorithm Input",
   context_surv =
-    "data/PLACEHOLDER-country-features-vs-surveillance-approaches.xlsx",
-  dis_surv = "data/Disease surveillance matching .xlsx",
-  feat_obj_surv = "data/WSE review_v3 (MATRIX).xlsx"
+    "inst/extdata/PLACEHOLDER-country-features-vs-surveillance-approaches.xlsx",
+  dis_surv = "inst/extdata/Disease surveillance matching .xlsx",
+  feat_obj_surv = "inst/extdata/WSE review_v3 (MATRIX).xlsx"
 )
 
 # Column names

@@ -4,7 +4,7 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
   sidebar = bslib::sidebar(
 
-    width = "400px",
+    width = "300px",
     open = "always",
 
     shiny::helpText(
@@ -39,17 +39,17 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
     shiny::numericInput(
       "weight_country",
-      label = "country weight",
+      label = "Context (country) weight",
       value = score_weights$`Score country`
     ),
     shiny::numericInput(
       "weight_disease",
-      label = "disease weight",
+      label = "Disease weight",
       value = score_weights$`Score disease`
     ),
     shiny::numericInput(
       "weight_feature_objective",
-      label = "feature / objective weight",
+      label = "Feature / objective weight",
       value = score_weights$`Score feature / objective`
     )
 
