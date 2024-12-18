@@ -7,7 +7,7 @@ Authors@R:
 Description: This package reads raw data provided by experts about the
     adequacy of public health surveillance in light of country context,
     diseases of interest, and features and objectives of surveillance. It
-    implements scoring algorithms to generate a anked list of surveillance
+    implements scoring algorithms to generate a ranked list of surveillance
     approaches. This is illustrated in an interactive web application.
 License: MIT + file LICENSE
 Imports: 

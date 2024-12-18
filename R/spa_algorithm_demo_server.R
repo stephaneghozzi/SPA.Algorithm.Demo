@@ -75,14 +75,23 @@ spa_algorithm_demo_server <- function(input, output, session) {
   })
 
   # Display the scores in a table
+
+  headerCallback <- c(
+    "function(thead, data, start, end, display){",
+    "  $('th', thead).css('border-bottom', '2px solid');",
+    "}"
+  )
+
   output$score_table <- DT::renderDT({
 
     DT::datatable(
       surv_scores_display(),
       rownames = FALSE,
+      class = "cell-border stripe",
       options = list(
         pageLength = nrow(surv_scores()),
-        dom = "ft"
+        dom = "ft",
+        headerCallback = htmlwidgets::JS(headerCallback)
       )
     ) |>
       DT::formatStyle(
@@ -96,6 +105,14 @@ spa_algorithm_demo_server <- function(input, output, session) {
             "Rank 1", "Rank 2")
         ],
         color = "DarkGrey"
+      ) |>
+      DT::formatStyle(
+        c(surveillance_approach_col_name, "Score surveillance approach 1"),
+        `border-right` = "solid 1px"
+      ) |>
+      DT::formatStyle(
+        "Score surveillance approach 2",
+        `border-right` = "solid 2px"
       )
   })
 

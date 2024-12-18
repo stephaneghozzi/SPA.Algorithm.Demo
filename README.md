@@ -9,7 +9,7 @@
 This package reads raw data provided by experts about the adequacy of
 public health surveillance in light of country context, diseases of
 interest, and features and objectives of surveillance. It implements
-scoring algorithms to generate a anked list of surveillance approaches.
+scoring algorithms to generate a ranked list of surveillance approaches.
 This is illustrated in an interactive web application.
 
 ## Installation
@@ -36,3 +36,15 @@ To run the app, execute:
 ``` r
 SPA.Algorithm.Demo::spa_algorithm_demo_app()
 ```
+
+It looks like this:
+
+<figure>
+<img src="man/figures/screenshot_spa_algorithm_demo_app.png"
+alt="Screenshot of the SPA Algorithm Demo app" />
+<figcaption aria-hidden="true">Screenshot of the SPA Algorithm Demo
+app</figcaption>
+</figure>
+
+It is deployed here:
+<https://stephaneghozzi.shinyapps.io/spa_algorithm_demo_app/>
