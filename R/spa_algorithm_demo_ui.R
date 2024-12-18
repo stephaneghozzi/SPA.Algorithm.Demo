@@ -1,10 +1,13 @@
-spa_algorithm_demo_ui <- page_sidebar(
+#' UI of the SPA Algorithm Demo web application
+#'
+#' @export
+spa_algorithm_demo_ui <- bslib::page_sidebar(
 
   title = "SPA Algorithm Demo",
 
-  sidebar = sidebar(
+  sidebar = bslib::sidebar(
 
-    width = "300px",
+    width = "400px",
     open = "always",
 
     shiny::helpText(

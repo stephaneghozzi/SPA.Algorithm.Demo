@@ -1,3 +1,6 @@
+#' Server of the SPA Algorithm Demo web application
+#'
+#' @export
 spa_algorithm_demo_server <- function(input, output, session) {
 
   # Prepare lists of countries, diseases, and surveillance objective / feature,
