@@ -1,8 +1,8 @@
-spa_algorithm_demo_ui <- bslib::page_sidebar(
+spa_algorithm_demo_ui <- page_sidebar(
 
   title = "SPA Algorithm Demo",
 
-  sidebar = bslib::sidebar(
+  sidebar = sidebar(
 
     width = "300px",
     open = "always",
