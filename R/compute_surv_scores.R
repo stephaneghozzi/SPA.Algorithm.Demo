@@ -39,8 +39,8 @@ compute_surv_scores <- function(
       .groups = "drop"
     ) |>
     dplyr::mutate(
-      `Rank 1` = rank(-`Score surveillance approach 1`, ties.method = "first"),
-      `Rank 2` = rank(-`Score surveillance approach 2`, ties.method = "first"),
+      `Rank 1` = rank(-`Score surveillance approach 1`, ties.method = "min"),
+      `Rank 2` = rank(-`Score surveillance approach 2`, ties.method = "min"),
     ) |>
     dplyr::relocate(
       dplyr::all_of(
