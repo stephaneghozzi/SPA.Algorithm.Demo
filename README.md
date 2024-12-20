@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This package reads raw data provided by experts about the adequacy of
+This R package reads raw data provided by experts about the adequacy of
 public health surveillance in light of country context, diseases of
 interest, and features and objectives of surveillance. It implements
 scoring algorithms to generate a ranked list of surveillance approaches.
@@ -27,6 +27,12 @@ or:
 ``` r
 # install.packages("devtools")
 devtools::install_github("stephaneghozzi/SPA.Algorithm.Demo")
+```
+
+or download this repository and run:
+
+``` r
+install.packages(path_to_this_folder, repos = NULL, type = "source")
 ```
 
 ## Running the app
