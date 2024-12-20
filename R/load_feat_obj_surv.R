@@ -3,7 +3,7 @@ load_feat_obj_surv <- function(file_path, feat_obj_col_name) {
   # Load raw matrix of objective vs surveillance approach
   feat_obj_surv <- readxl::read_xlsx(file_path, skip = 1)
 
-  # Clean featrue / objective column name
+  # Clean feature / objective column name
   feat_obj_col_select <- "features"
   feat_obj_col_num <- which(grepl(feat_obj_col_select, names(feat_obj_surv)))
   names(feat_obj_surv)[feat_obj_col_num] <- feat_obj_col_name

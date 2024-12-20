@@ -32,8 +32,8 @@ compute_surv_scores <- function(
       )
     ) |>
     dplyr::summarize(
-      `Score surveillance approach 1` = prod(score_value ^ weight_value) /
-        exp(sum(weight_value)),
+      `Score surveillance approach 1` = prod(score_value ^ weight_value) ^
+        (1 / sum(weight_value)),
       `Score surveillance approach 2` = sum(score_value * weight_value) /
         sum(weight_value),
       .groups = "drop"

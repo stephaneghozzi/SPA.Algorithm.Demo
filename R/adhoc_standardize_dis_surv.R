@@ -2,8 +2,6 @@
 # in the "features / objectives" table.
 adhoc_standardize_dis_surv <- function(dis_surv, surv_names, disease_col_name) {
 
-  # dis_surv <- dis_surv1
-
   # Ad-hoc corrections
   correct_cbs <- which(names(dis_surv) == "Community-based Surveillance")
   names(dis_surv)[correct_cbs] <- "Community based surveillance"

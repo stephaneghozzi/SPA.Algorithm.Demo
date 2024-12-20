@@ -1,6 +1,3 @@
-#' Server of the SPA Algorithm Demo web application
-#'
-#' @export
 spa_algorithm_demo_server <- function(input, output, session) {
 
   # Prepare lists of countries, diseases, and surveillance objective / feature,
@@ -75,7 +72,6 @@ spa_algorithm_demo_server <- function(input, output, session) {
   })
 
   # Display the scores in a table
-
   headerCallback <- c(
     "function(thead, data, start, end, display){",
     "  $('th', thead).css('border-bottom', '2px solid');",
@@ -128,7 +124,6 @@ spa_algorithm_demo_server <- function(input, output, session) {
           system.file("extdata", package = "SPA.Algorithm.Demo"),
           full.names = TRUE
         ),
-        # include_directories = FALSE,
         mode = "cherry-pick"
       )
     },

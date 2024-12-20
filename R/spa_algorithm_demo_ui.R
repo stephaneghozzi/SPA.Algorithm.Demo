@@ -1,6 +1,3 @@
-#' UI of the SPA Algorithm Demo web application
-#'
-#' @export
 spa_algorithm_demo_ui <- bslib::page_sidebar(
 
   title = "SPA Algorithm Demo",

@@ -1,7 +1,3 @@
-# country <- "Argentina"
-# disease <- "Avian Influenza"
-# objective_feature <- "Can monitor zoonotic disease over time"
-
 compile_specific_scores <- function(
   spa_individual_scores,
   country, disease, objective_feature
