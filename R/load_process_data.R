@@ -25,9 +25,7 @@ load_process_data <- function() {
 
   # Compute final country score based on contexts
   country_score <- compute_country_score(country_context_surv,
-    context_score_weights, context_surv_score_col_name,
-    context_col_name, country_col_name, surveillance_approach_col_name,
-    country_score_col_name)
+    context_score_weights)
 
   # Features and objectives vs surveillance approaches
   feat_obj_surv_score <- feat_obj_surv |>

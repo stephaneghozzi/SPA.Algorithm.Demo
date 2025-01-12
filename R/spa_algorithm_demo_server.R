@@ -44,8 +44,10 @@ spa_algorithm_demo_server <- function(input, output, session) {
 
   # Compute scores
   specific_scores <- shiny::reactive({
-    compile_specific_scores(spa_individual_scores,
-    input$country, input$disease, input$feature_objective)
+    compile_specific_scores(
+      spa_individual_scores, input$country, input$disease,
+      input$feature_objective
+    )
   })
 
   score_weights_input <- shiny::reactive({

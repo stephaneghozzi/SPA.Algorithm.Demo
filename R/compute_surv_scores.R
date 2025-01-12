@@ -1,4 +1,5 @@
-compute_surv_scores <- function(specific_scores, score_weights) {
+compute_surv_scores <- function(specific_scores, score_weights,
+  context_score_not_prioritised) {
 
   score_weights_df <- score_weights |>
     tibble::as_tibble() |>

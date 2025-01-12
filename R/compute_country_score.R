@@ -1,6 +1,5 @@
-compute_country_score <- function(country_context_score, context_score_weights,
-  context_surv_score_col_name, context_col_name, country_col_name,
-  surveillance_approach_col_name, country_score_col_name) {
+compute_country_score <- function(country_context_score,
+  context_score_weights) {
 
   context_weight_col_name <- "Context weight"
 

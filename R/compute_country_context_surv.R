@@ -54,7 +54,8 @@ compute_country_context_surv <- function(country_context, context_surv,
     dplyr::mutate(
       "{context_surv_score_col_name}" := compute_score_priority(
         .data[[surveillance_approach_col_name]],
-        .data[[prio_surv_col_name]]
+        .data[[prio_surv_col_name]],
+        context_score_not_prioritised
       )
     )
 
