@@ -1,10 +1,4 @@
-compute_surv_scores <- function(
-  specific_scores,
-  score_weights
-  # context_score_weights
-  # country_score_col_name, disease_score_col_name, feat_obj_score_col_name,
-  # surveillance_approach_col_name
-) {
+compute_surv_scores <- function(specific_scores, score_weights) {
 
   score_weights_df <- score_weights |>
     tibble::as_tibble() |>

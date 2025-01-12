@@ -1,9 +1,5 @@
-compile_specific_scores <- function(
-  spa_individual_scores,
-  country, disease, objective_feature
-  # country_col_name, disease_col_name, feat_obj_col_name,
-  # surveillance_approach_col_name
-) {
+compile_specific_scores <- function(spa_individual_scores, country, disease,
+  objective_feature) {
 
   cs <- spa_individual_scores$country_score[
     spa_individual_scores$country_score[[country_col_name]] == country,
