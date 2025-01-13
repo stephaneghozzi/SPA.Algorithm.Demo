@@ -7,8 +7,6 @@ file_paths <- list(
   context_country =
     "inst/extdata/Contextual Computation V0.3 - Live Version.xlsx",
   context_country_sheet = "Contextual Algorithm Input",
-  # context_surv =
-  #   "inst/extdata/PLACEHOLDER-country-features-vs-surveillance-approaches.xlsx",
   context_surv =
     "inst/extdata/context-vs-surveillance-approaches.xlsx",
   dis_surv = "inst/extdata/Disease surveillance matching .xlsx",
@@ -48,3 +46,6 @@ score_weights <- list()
 score_weights[[country_score_col_name]] <- 1.
 score_weights[[disease_score_col_name]] <- 1.
 score_weights[[feat_obj_score_col_name]] <- 1.
+
+# Application
+show_results_score_threshold <- 0.75

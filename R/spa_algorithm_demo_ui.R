@@ -19,41 +19,17 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
     ),
 
     shiny::selectInput(
-      "disease",
-      label = "Choose a disease",
-      choices = ""
+      "diseases",
+      label = "Choose diseases",
+      choices = "",
+      multiple = TRUE
     ),
 
     shiny::selectInput(
-      "feature_objective",
-      label = "Choose a feature / objective",
-      choices = ""
-    ),
-
-    htmltools::hr(),
-
-    shiny::helpText(
-      "Enter numerical values for the weights. Only the relative values",
-      "matter, e.g., weights of 2, 6, 1 lead the same results as 20, 60, 10."
-    ),
-
-    shiny::numericInput(
-      "weight_country",
-      label = "Context (country) weight",
-      value = score_weights$`Score country`,
-      min = 0.
-    ),
-    shiny::numericInput(
-      "weight_disease",
-      label = "Disease weight",
-      value = score_weights$`Score disease`,
-      min = 0.
-    ),
-    shiny::numericInput(
-      "weight_feature_objective",
-      label = "Feature / objective weight",
-      value = score_weights$`Score feature / objective`,
-      min = 0.
+      "features_objectives",
+      label = "Choose features / objectives",
+      choices = "",
+      multiple = TRUE
     )
 
   ),
@@ -64,8 +40,10 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
     footer = htmltools::hr(),
 
     bslib::nav_panel(
-      title = "Scores",
-      DT::dataTableOutput("score_table")
+      title = "Results",
+
+      DT::dataTableOutput("results_table")
+
     ),
 
     bslib::nav_panel(
@@ -87,6 +65,39 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
           "https://github.com/stephaneghozzi/SPA.Algorithm.Demo</a>"
         )
       )
+    ),
+
+    bslib::nav_panel(
+      title = "Advanced",
+
+      shiny::helpText(
+        "Enter numerical values for the weights. Only the relative values",
+        "matter, e.g., weights of 2, 6, 1 lead the same results as 20, 60, 10."
+      ),
+
+      shiny::numericInput(
+        "weight_country",
+        label = "Context (country) weight",
+        value = score_weights$`Score country`,
+        min = 0.
+      ),
+      shiny::numericInput(
+        "weight_disease",
+        label = "Disease weight",
+        value = score_weights$`Score disease`,
+        min = 0.
+      ),
+      shiny::numericInput(
+        "weight_feature_objective",
+        label = "Feature / objective weight",
+        value = score_weights$`Score feature / objective`,
+        min = 0.
+      ),
+
+      htmltools::hr(),
+
+      DT::dataTableOutput("advanced_score_table")
+
     )
 
   )

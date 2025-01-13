@@ -18,7 +18,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
   shiny::observe({
     shiny::updateSelectInput(
       session,
-      "disease",
+      "diseases",
       choices = sort(
         unique(spa_individual_scores$dis_surv_score[[disease_col_name]])
       ),
@@ -31,7 +31,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
   shiny::observe({
     shiny::updateSelectInput(
       session,
-      "feature_objective",
+      "features_objectives",
       choices = sort(
         unique(spa_individual_scores$feat_obj_surv_score[[feat_obj_col_name]])
       ),
@@ -45,8 +45,8 @@ spa_algorithm_demo_server <- function(input, output, session) {
   # Compute scores
   specific_scores <- shiny::reactive({
     compile_specific_scores(
-      spa_individual_scores, input$country, input$disease,
-      input$feature_objective
+      spa_individual_scores, input$country, input$diseases,
+      input$features_objectives
     )
   })
 
@@ -73,14 +73,41 @@ spa_algorithm_demo_server <- function(input, output, session) {
       )
   })
 
-  # Display the scores in a table
+  ranked_approaches_results <- shiny::reactive({
+    surv_scores_display() |>
+      dplyr::select(
+        dplyr::all_of(
+          c(surveillance_approach_col_name, "Rank 1", "Score surveillance approach 1")
+        )
+      ) |>
+      dplyr::rename(
+        Rank = `Rank 1`,
+        Score = `Score surveillance approach 1`
+      ) |>
+      dplyr::filter(Score >= show_results_score_threshold)
+  })
+
+  # Table
   headerCallback <- c(
     "function(thead, data, start, end, display){",
     "  $('th', thead).css('border-bottom', '2px solid');",
     "}"
   )
 
-  output$score_table <- DT::renderDT({
+  output$results_table <- DT::renderDT({
+    DT::datatable(
+      ranked_approaches_results(),
+      rownames = FALSE,
+      class = "cell-border stripe",
+      options = list(
+        pageLength = nrow(surv_scores()),
+        dom = "ft",
+        headerCallback = htmlwidgets::JS(headerCallback)
+      )
+    )
+  })
+
+  output$advanced_score_table <- DT::renderDT({
 
     DT::datatable(
       surv_scores_display(),
