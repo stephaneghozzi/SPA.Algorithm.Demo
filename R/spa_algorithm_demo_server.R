@@ -70,19 +70,21 @@ spa_algorithm_demo_server <- function(input, output, session) {
       dplyr::arrange(
         surveillance_approach_col_name,
         dplyr::desc(`Score surveillance approach 1`)
-      )
+      ) |>
+      dplyr::rename(
+        Rank = "Rank 1",
+        Score = "Score surveillance approach 1"
+      ) |>
+      dplyr::select(-`Rank 2`, -`Score surveillance approach 2`) |>
+      dplyr::filter(Score > 0)
   })
 
   ranked_approaches_results <- shiny::reactive({
     surv_scores_display() |>
       dplyr::select(
         dplyr::all_of(
-          c(surveillance_approach_col_name, "Rank 1", "Score surveillance approach 1")
+          c(surveillance_approach_col_name, "Rank", "Score")
         )
-      ) |>
-      dplyr::rename(
-        Rank = `Rank 1`,
-        Score = `Score surveillance approach 1`
       ) |>
       dplyr::filter(Score >= show_results_score_threshold)
   })
@@ -124,24 +126,15 @@ spa_algorithm_demo_server <- function(input, output, session) {
       )
     ) |>
       DT::formatStyle(
-        c(surveillance_approach_col_name, "Rank 1", "Rank 2"),
-        fontWeight = "bold"
-      ) |>
-      DT::formatStyle(
-        names(surv_scores())[
-          !names(surv_scores()) %in% c(surveillance_approach_col_name,
-            "Score surveillance approach 1", "Score surveillance approach 2",
-            "Rank 1", "Rank 2")
+        names(surv_scores_display())[
+          !names(surv_scores_display()) %in% c(surveillance_approach_col_name,
+            "Score", "Rank")
         ],
         color = "DarkGrey"
       ) |>
       DT::formatStyle(
-        c(surveillance_approach_col_name, "Score surveillance approach 1"),
+        c(surveillance_approach_col_name, "Score"),
         `border-right` = "solid 1px"
-      ) |>
-      DT::formatStyle(
-        "Score surveillance approach 2",
-        `border-right` = "solid 2px"
       )
   })
 
