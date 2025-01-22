@@ -40,9 +40,9 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
     footer = htmltools::hr(),
 
     bslib::nav_panel(
-      title = "Results",
+      title = "Optimal approaches",
 
-      DT::dataTableOutput("results_table")
+      DT::dataTableOutput("optimal_approaches_table")
 
     ),
 
@@ -68,7 +68,7 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
     ),
 
     bslib::nav_panel(
-      title = "Advanced",
+      title = "Results",
 
       shiny::helpText(
         "Enter numerical values for the weights. Only the relative values",
@@ -96,7 +96,7 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
       htmltools::hr(),
 
-      DT::dataTableOutput("advanced_score_table")
+      DT::dataTableOutput("full_results_table")
 
     )
 

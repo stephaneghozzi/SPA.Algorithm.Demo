@@ -94,7 +94,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
     "}"
   )
 
-  output$results_table <- DT::renderDT({
+  output$optimal_approaches_table <- DT::renderDT({
     DT::datatable(
       ranked_approaches_results(),
       rownames = FALSE,
@@ -107,7 +107,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
     )
   })
 
-  output$advanced_score_table <- DT::renderDT({
+  output$full_results_table <- DT::renderDT({
 
     DT::datatable(
       surv_scores_display(),
