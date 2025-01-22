@@ -102,7 +102,11 @@ spa_algorithm_demo_server <- function(input, output, session) {
       options = list(
         pageLength = nrow(surv_scores()),
         dom = "ft",
-        headerCallback = htmlwidgets::JS(headerCallback)
+        headerCallback = htmlwidgets::JS(headerCallback),
+        language = list(
+            zeroRecords = paste0('No approach met the optimal threshold. ',
+            'However you can see the "Results" tab for details.')
+        )
       )
     )
   })
