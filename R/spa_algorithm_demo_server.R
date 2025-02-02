@@ -91,7 +91,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
       dplyr::filter(Score >= show_results_score_threshold)
   })
 
-  # Table
+  # Tables
   headerCallback <- c(
     "function(thead, data, start, end, display){",
     "  $('th', thead).css('border-bottom', '2px solid');",
@@ -144,6 +144,58 @@ spa_algorithm_demo_server <- function(input, output, session) {
         `border-right` = "solid 1px"
       )
 
+  })
+
+  output$country_context_table <- DT::renderDT({
+    DT::datatable(
+      spa_individual_scores$country_context,
+      rownames = FALSE,
+      class = "cell-border stripe",
+      options = list(
+        pageLength = nrow(spa_individual_scores$country_context),
+        dom = "ft",
+        headerCallback = htmlwidgets::JS(headerCallback)
+      )
+    )
+  })
+
+  output$context_surv_table <- DT::renderDT({
+    DT::datatable(
+      spa_individual_scores$context_surv,
+      rownames = FALSE,
+      class = "cell-border stripe",
+      options = list(
+        pageLength = nrow(spa_individual_scores$context_surv),
+        dom = "ft",
+        headerCallback = htmlwidgets::JS(headerCallback)
+      )
+    )
+  })
+
+  output$dis_surv_table <- DT::renderDT({
+    DT::datatable(
+      spa_individual_scores$dis_surv,
+      rownames = FALSE,
+      class = "cell-border stripe",
+      options = list(
+        pageLength = nrow(spa_individual_scores$dis_surv),
+        dom = "ft",
+        headerCallback = htmlwidgets::JS(headerCallback)
+      )
+    )
+  })
+
+  output$feat_obj_surv_table <- DT::renderDT({
+    DT::datatable(
+      spa_individual_scores$feat_obj_surv,
+      rownames = FALSE,
+      class = "cell-border stripe",
+      options = list(
+        pageLength = nrow(spa_individual_scores$feat_obj_surv),
+        dom = "ft",
+        headerCallback = htmlwidgets::JS(headerCallback)
+      )
+    )
   })
 
   # Get original data sets for download

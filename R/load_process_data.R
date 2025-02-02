@@ -54,7 +54,11 @@ load_process_data <- function() {
   spa_individual_scores <- list(
     country_score = country_score,
     dis_surv_score = dis_surv_score,
-    feat_obj_surv_score = feat_obj_surv_score
+    feat_obj_surv_score = feat_obj_surv_score,
+    country_context = country_context_values$country_context,
+    context_surv = context_surv,
+    dis_surv = dis_surv,
+    feat_obj_surv = feat_obj_surv
   )
 
   return(spa_individual_scores)

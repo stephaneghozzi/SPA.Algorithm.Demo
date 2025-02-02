@@ -36,35 +36,9 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
   bslib::navset_card_underline(
 
-    header = htmltools::hr(),
-    footer = htmltools::hr(),
-
     bslib::nav_panel(
       title = "Optimal approaches",
-
       DT::dataTableOutput("optimal_approaches_table")
-
-    ),
-
-    bslib::nav_panel(
-      title = "Data",
-      shiny::downloadButton(
-        "original_data_Set",
-        label = "Download original data set",
-        icon = shiny::icon("download", lib = "glyphicon")
-      )
-    ),
-
-    bslib::nav_panel(
-      title = "About",
-      htmltools::p("This a demo application illustrating the SPA algorithm."),
-      htmltools::p(
-        htmltools::HTML(
-          "Code repository:",
-          "<a href=https://github.com/stephaneghozzi/SPA.Algorithm.Demo>",
-          "https://github.com/stephaneghozzi/SPA.Algorithm.Demo</a>"
-        )
-      )
     ),
 
     bslib::nav_panel(
@@ -98,6 +72,71 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
       DT::dataTableOutput("full_results_table")
 
+    ),
+
+    bslib::nav_panel(
+      title = "Data",
+
+      bslib::navset_underline(
+
+        bslib::nav_panel(
+
+          title = "Raw files",
+
+          # quick fix to avoid the download button sticking to the tab title,
+          # should rather set padding, but I didn't manage to
+          htmltools::HTML("&nbsp;"),
+
+          shiny::downloadButton(
+            "original_data_Set",
+            label = "Download original data set",
+            icon = shiny::icon("download", lib = "glyphicon")
+          )
+
+        ),
+
+        bslib::nav_panel(
+          title = "Country context",
+
+          bslib::navset_underline(
+
+            bslib::nav_panel(
+              title = "Indicators",
+              DT::dataTableOutput("country_context_table")
+            ),
+
+            bslib::nav_panel(
+              title = "Rules",
+              DT::dataTableOutput("context_surv_table")
+            )
+
+          )
+
+        ),
+
+        bslib::nav_panel(
+          title = "Disease matching",
+          DT::dataTableOutput("dis_surv_table")
+        ),
+
+        bslib::nav_panel(
+          title = "Feature / objective matching",
+          DT::dataTableOutput("feat_obj_surv_table")
+        )
+      )
+
+    ),
+
+    bslib::nav_panel(
+      title = "About",
+      htmltools::p("This a demo application illustrating the SPA algorithm."),
+      htmltools::p(
+        htmltools::HTML(
+          "Code repository:",
+          "<a href=https://github.com/stephaneghozzi/SPA.Algorithm.Demo>",
+          "https://github.com/stephaneghozzi/SPA.Algorithm.Demo</a>"
+        )
+      )
     )
 
   )
