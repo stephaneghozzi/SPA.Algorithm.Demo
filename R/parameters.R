@@ -48,4 +48,4 @@ score_weights[[disease_score_col_name]] <- 1.
 score_weights[[feat_obj_score_col_name]] <- 1.
 
 # Application
-show_results_score_threshold <- 0.75
+display_score_threshold_default <- 0.75

@@ -45,6 +45,32 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
       title = "Results",
 
       shiny::helpText(
+        "Approaches with Score 0 are not shown below."
+      ),
+
+      DT::dataTableOutput("full_results_table")
+
+    ),
+
+    bslib::nav_panel(
+      title = "Advanced controls",
+
+      shiny::helpText(
+        "Set the threshold for the Score above which the approaches are",
+        "displayed as \"optimal\"."
+      ),
+
+      shiny::sliderInput(
+        "display_score_threshold",
+        label = "Score threshold",
+        value = display_score_threshold_default,
+        min = 0.,
+        max = 1.
+      ),
+
+      htmltools::hr(),
+
+      shiny::helpText(
         "Enter numerical values for the weights. Only the relative values",
         "matter, e.g., weights of 2, 6, 1 lead the same results as 20, 60, 10."
       ),
@@ -66,11 +92,7 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
         label = "Feature / objective weight",
         value = score_weights$`Score feature / objective`,
         min = 0.
-      ),
-
-      htmltools::hr(),
-
-      DT::dataTableOutput("full_results_table")
+      )
 
     ),
 

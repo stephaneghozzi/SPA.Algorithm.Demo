@@ -88,7 +88,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
         )
       ) |>
       unique() |>
-      dplyr::filter(Score >= show_results_score_threshold)
+      dplyr::filter(Score >= input$display_score_threshold)
   })
 
   # Tables
