@@ -8,42 +8,38 @@ compute_surv_scores <- function(specific_scores, score_weights) {
       values_to = "weight_value"
     )
 
-  surv_scores <- specific_scores |>
-    dplyr::select(
-      dplyr::all_of(c(surveillance_approach_col_name, country_score_col_name,
-        disease_score_col_name, feat_obj_score_col_name))
-    ) |>
+  specific_scores_combined <- specific_scores |>
     tidyr::pivot_longer(
-      dplyr::all_of(c(country_score_col_name, disease_score_col_name,
-        feat_obj_score_col_name)),
+      {{ country_score_col_name }} | {{ disease_score_col_name }} |
+        {{feat_obj_score_col_name }},
       names_to = "score_type",
       values_to = "score_value"
     ) |>
     dplyr::left_join(score_weights_df, by = c("score_type" = "weight_type")) |>
     dplyr::group_by(
       dplyr::across(
-        dplyr::all_of(surveillance_approach_col_name)
+        dplyr::all_of(
+          c(surveillance_approach_col_name, country_col_name, disease_col_name,
+            feat_obj_col_name)
+        )
       )
     ) |>
     dplyr::summarize(
-      `Score surveillance approach 1` = prod(score_value ^ weight_value) ^
-        (1 / sum(weight_value)),
-      `Score surveillance approach 2` = sum(score_value * weight_value) /
-        sum(weight_value),
+      `Score individual` = compute_score_individual(score_value, weight_value),
+      .groups = "drop"
+    )
+
+  surv_scores <- specific_scores_combined |>
+    dplyr::group_by(
+      dplyr::across(dplyr::all_of(surveillance_approach_col_name))
+    ) |>
+    dplyr::summarize(
+      Score = mean(`Score individual`),
       .groups = "drop"
     ) |>
-    dplyr::mutate(
-      `Rank 1` = rank(-`Score surveillance approach 1`, ties.method = "min"),
-      `Rank 2` = rank(-`Score surveillance approach 2`, ties.method = "min"),
-    ) |>
-    dplyr::relocate(
-      dplyr::all_of(
-        c(surveillance_approach_col_name, "Rank 1",
-          "Score surveillance approach 1", "Rank 2",
-          "Score surveillance approach 2")
-      )
-    ) |>
-    dplyr::left_join(specific_scores, by = surveillance_approach_col_name)
+    dplyr::mutate(Rank = rank(-Score, ties.method = "min")) |>
+    dplyr::right_join(specific_scores_combined) |>
+    dplyr::right_join(specific_scores)
 
   return(surv_scores)
 

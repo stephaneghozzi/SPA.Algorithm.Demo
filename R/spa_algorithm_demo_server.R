@@ -64,18 +64,19 @@ spa_algorithm_demo_server <- function(input, output, session) {
 
   surv_scores_display <- shiny::reactive({
     surv_scores() |>
+      dplyr::relocate(
+        dplyr::all_of(
+          c(surveillance_approach_col_name, "Rank", "Score", "Score individual",
+            country_col_name, country_score_col_name,
+            paste0("Score ", names(context_score_weights)), disease_col_name,
+            disease_score_col_name, feat_obj_col_name, feat_obj_score_col_name)
+        )
+      ) |>
+      dplyr::rename(dplyr::all_of(c(Country = country_col_name))) |>
+      dplyr::arrange(surveillance_approach_col_name, dplyr::desc(Score)) |>
       dplyr::mutate(
         dplyr::across(dplyr::where(is.numeric), ~ signif(.x, 2))
       ) |>
-      dplyr::arrange(
-        surveillance_approach_col_name,
-        dplyr::desc(`Score surveillance approach 1`)
-      ) |>
-      dplyr::rename(
-        Rank = "Rank 1",
-        Score = "Score surveillance approach 1"
-      ) |>
-      dplyr::select(-`Rank 2`, -`Score surveillance approach 2`) |>
       dplyr::filter(Score > 0)
   })
 
@@ -86,6 +87,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
           c(surveillance_approach_col_name, "Rank", "Score")
         )
       ) |>
+      unique() |>
       dplyr::filter(Score >= show_results_score_threshold)
   })
 
@@ -126,16 +128,22 @@ spa_algorithm_demo_server <- function(input, output, session) {
       )
     ) |>
       DT::formatStyle(
-        names(surv_scores_display())[
-          !names(surv_scores_display()) %in% c(surveillance_approach_col_name,
-            "Score", "Rank")
-        ],
+        paste0("Score ", names(context_score_weights)),
         color = "DarkGrey"
       ) |>
       DT::formatStyle(
-        c(surveillance_approach_col_name, "Score"),
+        c("Score"),
+        `border-right` = "solid 2px"
+      ) |>
+      DT::formatStyle(
+        c("Country", disease_col_name, feat_obj_col_name),
+        `border-left` = "solid 2px"
+      ) |>
+      DT::formatStyle(
+        country_score_col_name,
         `border-right` = "solid 1px"
       )
+
   })
 
   # Get original data sets for download
