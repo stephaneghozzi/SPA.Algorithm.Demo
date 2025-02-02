@@ -45,12 +45,7 @@ SPA.Algorithm.Demo::spa_algorithm_demo_app()
 
 It looks like this:
 
-<figure>
-<img src="man/figures/screenshot_spa_algorithm_demo_app.png"
-alt="Screenshot of the SPA Algorithm Demo app" />
-<figcaption aria-hidden="true">Screenshot of the SPA Algorithm Demo
-app</figcaption>
-</figure>
+![](man/figures/screenshot_spa_algorithm_demo_app.png)
 
 It is deployed here:
 <https://stephaneghozzi.shinyapps.io/spa_algorithm_demo_app/>

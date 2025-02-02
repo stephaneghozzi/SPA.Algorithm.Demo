@@ -51,6 +51,6 @@ SPA.Algorithm.Demo::spa_algorithm_demo_app()
 ```
 It looks like this:
 
-![Screenshot of the SPA Algorithm Demo app](man/figures/screenshot_spa_algorithm_demo_app.png)
+![](man/figures/screenshot_spa_algorithm_demo_app.png)
 
 It is deployed here: [https://stephaneghozzi.shinyapps.io/spa_algorithm_demo_app/](https://stephaneghozzi.shinyapps.io/spa_algorithm_demo_app/)
