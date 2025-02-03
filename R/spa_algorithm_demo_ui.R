@@ -151,14 +151,8 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
     bslib::nav_panel(
       title = "About",
-      htmltools::p("This a demo application illustrating the SPA algorithm."),
-      htmltools::p(
-        htmltools::HTML(
-          "Code repository:",
-          "<a href=https://github.com/stephaneghozzi/SPA.Algorithm.Demo>",
-          "https://github.com/stephaneghozzi/SPA.Algorithm.Demo</a>"
-        )
-      )
+      htmltools::includeMarkdown(file_paths$about)
+
     )
 
   )

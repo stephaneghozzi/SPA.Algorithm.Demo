@@ -10,7 +10,8 @@ file_paths <- list(
   context_surv =
     "inst/extdata/context-vs-surveillance-approaches.xlsx",
   dis_surv = "inst/extdata/Disease surveillance matching .xlsx",
-  feat_obj_surv = "inst/extdata/WSE review_v3 (MATRIX).xlsx"
+  feat_obj_surv = "inst/extdata/WSE review_v3 (MATRIX).xlsx",
+  about = "inst/about.md"
 )
 
 # Column names
