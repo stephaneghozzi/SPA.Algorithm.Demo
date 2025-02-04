@@ -27,6 +27,10 @@ prio_surv_col_name <- "Prioritised surveillance approaches"
 surveillance_approach_col_name <- "Surveillance approach"
 context_surv_score_col_name <- "Score context"
 country_score_col_name <- "Score country"
+combination_score_col_name <- "ACDO Score" # "Approach Country Disease
+  # Objectives score"
+rank_col_name <- "Rank"
+final_score_col_name <- "Score"
 
 # Default settings for scores
 

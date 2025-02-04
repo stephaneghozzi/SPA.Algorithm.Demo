@@ -66,23 +66,29 @@ spa_algorithm_demo_server <- function(input, output, session) {
     surv_scores() |>
       dplyr::relocate(
         dplyr::all_of(
-          c(surveillance_approach_col_name, "Rank", "Score", "Score individual",
-            country_col_name, country_score_col_name,
+          c(surveillance_approach_col_name, rank_col_name, final_score_col_name,
+            combination_score_col_name, country_col_name,
+            country_score_col_name,
             paste0("Score ", names(context_score_weights)), disease_col_name,
             disease_score_col_name, feat_obj_col_name, feat_obj_score_col_name)
         )
       ) |>
       dplyr::rename(dplyr::all_of(c(Country = country_col_name))) |>
-      dplyr::arrange(surveillance_approach_col_name, dplyr::desc(Score)) |>
+      dplyr::arrange(
+        surveillance_approach_col_name,
+        dplyr::desc(.data[[final_score_col_name]])
+      ) |>
       dplyr::mutate(
         dplyr::across(dplyr::where(is.numeric), ~ signif(.x, 2))
       ) |>
-      dplyr::filter(Score > 0)
+      dplyr::filter(.data[[final_score_col_name]] > 0)
   })
 
   ranked_approaches_results <- shiny::reactive({
     surv_scores_display() |>
-      dplyr::filter(Score >= input$display_score_threshold) |>
+      dplyr::filter(
+        .data[[final_score_col_name]] >= input$display_score_threshold
+      ) |>
       dplyr::select({{ surveillance_approach_col_name }}) |>
       unique()
   })
@@ -128,7 +134,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
         color = "DarkGrey"
       ) |>
       DT::formatStyle(
-        c("Score"),
+        combination_score_col_name,
         `border-right` = "solid 2px"
       ) |>
       DT::formatStyle(
