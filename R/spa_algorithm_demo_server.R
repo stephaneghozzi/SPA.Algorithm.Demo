@@ -82,13 +82,9 @@ spa_algorithm_demo_server <- function(input, output, session) {
 
   ranked_approaches_results <- shiny::reactive({
     surv_scores_display() |>
-      dplyr::select(
-        dplyr::all_of(
-          c(surveillance_approach_col_name, "Rank", "Score")
-        )
-      ) |>
       unique() |>
-      dplyr::filter(Score >= input$display_score_threshold)
+      dplyr::filter(Score >= input$display_score_threshold) |>
+      dplyr::select({{ surveillance_approach_col_name }})
   })
 
   # Tables
