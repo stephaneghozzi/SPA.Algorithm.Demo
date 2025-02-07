@@ -107,7 +107,8 @@ spa_algorithm_demo_server <- function(input, output, session) {
       class = "cell-border stripe",
       options = list(
         pageLength = nrow(surv_scores()),
-        dom = "ft",
+        dom = "t",
+        ordering = FALSE,
         headerCallback = htmlwidgets::JS(headerCallback),
         language = list(
             zeroRecords = paste0('No approach met the optimal threshold. ',

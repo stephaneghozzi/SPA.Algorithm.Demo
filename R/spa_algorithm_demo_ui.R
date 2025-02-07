@@ -1,6 +1,6 @@
 spa_algorithm_demo_ui <- bslib::page_sidebar(
 
-  title = "SPA Algorithm Demo",
+  title = "SPA.Algorithm.Demo",
 
   sidebar = bslib::sidebar(
 

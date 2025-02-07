@@ -12,6 +12,9 @@ interest, and features and objectives of surveillance. It implements
 scoring algorithms to generate a ranked list of surveillance approaches.
 This is illustrated in an interactive web application.
 
+See [inst/about.md](inst/about.md) for a detailed description of the
+application and the computations.
+
 ## Installation
 
 You can install the development version of SPA.Algorithm.Demo from
