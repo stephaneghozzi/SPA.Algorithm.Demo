@@ -84,11 +84,10 @@ The second step consists in deriving a single score from the four country-contex
 - Country context: *Score country* is the **average** of the four scores: *Score country* = (*Score Natural* + *Score Epidemic* + *Score Laboratory Capacity D1.1* + *Score Surveillance Capacity D2.1)*) / 4
 
 The third step combines the three scores for one country, one disease and one feature and objective, into one score, called *ACDO Score* (Approach Country Disease Objectives). The logic stipulates that:
-- if an approach is excluded based on disease or feature / objective, i.e. if *Score disease* = 0 or *Score feature/objective* = 0, then the approach should be excluded, i.e. *ACDO Score* = 0.;
-- an approach shouldn't based on context, but given a minimum above 0 (currently 0.5) is set for each context score, then *Score country* is always strictly positive;
+- if an approach is excluded based on disease or feature / objective, i.e. if *Score disease* = 0 or *Score feature/objective* = 0, then the approach should be excluded, i.e. *ACDO Score* = 0;
+- an approach shouldn't be excluded based on context only (note that given that a minimum above 0 (currently 0.5) is set for each context score, then *Score country* is always strictly positive);
 - one expects that if a given approach is optimal in all three respects, i.e. if *Score country* = *Score disease* = *Score feature/objective* = 1, then the approach should be considered optimal for their combination, i.e. *ACDO Score* = 1; 
 - lastly, one would like to have the possibility of weighing country context, disease, and feature/objective differently, i.e. to give more importance to one or the other criterium compared to the others.
-
 
 All these conditions can be met by using a **multiplicative formula** and defining:
 - *ACDO Score* as the [weighted geometric mean](https://en.wikipedia.org/wiki/Weighted_geometric_mean) of *Score country*, *Score disease*, and *Score feature/objective*:
