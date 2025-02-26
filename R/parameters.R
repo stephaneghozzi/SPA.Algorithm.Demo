@@ -16,32 +16,39 @@ file_paths <- list(
 
 # Column names
 feat_obj_col_name <- "System features / Surveillance objectives"
-feat_obj_score_col_name <- "Score feature / objective"
+feat_obj_score_col_name <- "Objective Score"
 disease_col_name <- "Disease"
-disease_score_col_name <- "Score disease"
+disease_score_col_name <- "Disease Score"
 country_col_name <- "COUNTRY"
 context_col_name <- "Context type"
 context_value_col_name <- "Context value"
 context_inclusion_rule_col_name <- "Inclusion rule"
 prio_surv_col_name <- "Prioritised surveillance approaches"
 surveillance_approach_col_name <- "Surveillance approach"
+natural_disaster_risk_col_name <- "Natural"
+epidemic_risk_col_name <- "Epidemic"
+lab_capacitity_col_name <- "Laboratory Capacity D1.1"
+surv_capacitity_col_name <- "Surveillance Capacity D2.1)"
+
 context_surv_score_col_name <- "Score context"
-country_score_col_name <- "Score country"
-combination_score_col_name <- "ACDO Score" # "Approach Country Disease
-  # Objectives score"
+country_score_col_name <- "Country Score"
+combination_score_col_name <- "CDO Score" # "Country Disease Objective"
+natural_disaster_risk_score_col_name <- "Disaster Score"
+epidemic_risk_score_col_name <- "Epidemic Score"
+lab_capacitity_score_col_name <- "Lab Score"
+surv_capacitity_score_col_name <- "Surveillance Score"
+
 rank_col_name <- "Rank"
 final_score_col_name <- "Score"
 
 # Default settings for scores
 
-# The names of `context_score_weights` should be the same as in the
-# "context_country" data set
-context_score_weights <- list(
-  Natural = 1.,
-  Epidemic = 1.,
-  `Laboratory Capacity D1.1` = 1.,
-  `Surveillance Capacity D2.1)` = 1.
-)
+# Weights when combining individual context indicators
+context_score_weights <- list()
+context_score_weights[[natural_disaster_risk_col_name]] <- 1.
+context_score_weights[[epidemic_risk_col_name]] <- 1.
+context_score_weights[[lab_capacitity_col_name]] <- 1.
+context_score_weights[[surv_capacitity_col_name]] <- 1.
 
 # Context score when an approach is not prioritised
 context_score_not_prioritised <- 0.5

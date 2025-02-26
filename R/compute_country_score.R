@@ -1,4 +1,4 @@
-compute_country_score <- function(country_context_score,
+compute_country_score <- function(country_context_surv,
   context_score_weights) {
 
   context_weight_col_name <- "Context weight"
@@ -11,7 +11,7 @@ compute_country_score <- function(country_context_score,
       values_to = context_weight_col_name
     )
 
-  country_score <- country_context_score |>
+  country_score <- country_context_surv |>
     dplyr::left_join(context_score_weights_df, by = context_col_name) |>
     dplyr::group_by(
       dplyr::across(
@@ -20,7 +20,7 @@ compute_country_score <- function(country_context_score,
     ) |>
     dplyr::filter(!is.na(.data[[context_surv_score_col_name]])) |>
     dplyr::mutate(
-      score_country = sum(
+      "{country_score_col_name}" := sum(
         .data[[context_weight_col_name]] * .data[[context_surv_score_col_name]]
       ) / sum(.data[[context_weight_col_name]]),
     ) |>
@@ -31,15 +31,19 @@ compute_country_score <- function(country_context_score,
     ) |>
     dplyr::ungroup()
 
-  country_score[[country_score_col_name]] <- country_score$score_country
-  country_score$score_country <- NULL
-  col_context_Score <- which(
-    names(country_score) %in% names(context_score_weights)
-  )
-  names(country_score)[col_context_Score] <- paste0(
-    "Score ",
-    names(country_score)[col_context_Score]
-  )
+  # Rename context score columns
+  for (i in 1:length(names(country_score))) {
+    ncs <- names(country_score)[i]
+    if (ncs == natural_disaster_risk_col_name) {
+      names(country_score)[i] <- natural_disaster_risk_score_col_name
+    } else if (ncs == epidemic_risk_col_name) {
+      names(country_score)[i] <- epidemic_risk_score_col_name
+    } else if (ncs == lab_capacitity_col_name) {
+      names(country_score)[i] <- lab_capacitity_score_col_name
+    } else if (ncs == surv_capacitity_col_name) {
+      names(country_score)[i] <- surv_capacitity_score_col_name
+    }
+  }
 
   return(country_score)
 

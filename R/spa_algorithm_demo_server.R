@@ -51,11 +51,17 @@ spa_algorithm_demo_server <- function(input, output, session) {
   })
 
   score_weights_input <- shiny::reactive({
-    list(
-      `Score country` = input$weight_country,
-      `Score disease` = input$weight_disease,
-      `Score feature / objective` = input$weight_feature_objective
+    swi <- list(
+      input$weight_country,
+      input$weight_disease,
+      input$weight_feature_objective
     )
+    names(swi) <- c(
+      country_score_col_name,
+      disease_score_col_name,
+      feat_obj_score_col_name
+    )
+    swi
   })
 
   surv_scores <- shiny::reactive({
@@ -68,8 +74,9 @@ spa_algorithm_demo_server <- function(input, output, session) {
         dplyr::all_of(
           c(surveillance_approach_col_name, rank_col_name, final_score_col_name,
             combination_score_col_name, country_col_name,
-            country_score_col_name,
-            paste0("Score ", names(context_score_weights)), disease_col_name,
+            country_score_col_name, natural_disaster_risk_score_col_name,
+            epidemic_risk_score_col_name, lab_capacitity_score_col_name,
+            surv_capacitity_score_col_name, disease_col_name,
             disease_score_col_name, feat_obj_col_name, feat_obj_score_col_name)
         )
       ) |>
@@ -131,7 +138,8 @@ spa_algorithm_demo_server <- function(input, output, session) {
       )
     ) |>
       DT::formatStyle(
-        paste0("Score ", names(context_score_weights)),
+        c(natural_disaster_risk_score_col_name, epidemic_risk_score_col_name,
+          lab_capacitity_score_col_name, surv_capacitity_score_col_name),
         color = "DarkGrey"
       ) |>
       DT::formatStyle(

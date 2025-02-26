@@ -78,19 +78,19 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
       shiny::numericInput(
         "weight_country",
         label = "Context (country) weight",
-        value = score_weights$`Score country`,
+        value = score_weights[[country_score_col_name]],
         min = 0.
       ),
       shiny::numericInput(
         "weight_disease",
         label = "Disease weight",
-        value = score_weights$`Score disease`,
+        value = score_weights[[disease_score_col_name]],
         min = 0.
       ),
       shiny::numericInput(
         "weight_feature_objective",
         label = "Feature / objective weight",
-        value = score_weights$`Score feature / objective`,
+        value = score_weights[[feat_obj_score_col_name]],
         min = 0.
       )
 

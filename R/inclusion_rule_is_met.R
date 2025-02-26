@@ -1,6 +1,3 @@
-# values <- country_context_surv$`Context value`
-# rules <- country_context_surv$`Inclusion rule`
-# i <- 1
 inclusion_rule_is_met <- function(values, rules) {
 
   ref_values <- as.numeric(gsub(">|<|=| ", "", rules))
