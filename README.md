@@ -50,5 +50,5 @@ It looks like this:
 
 ![](man/figures/screenshot_spa_algorithm_demo_app.png)
 
-It is deployed here:
-<https://stephaneghozzi.shinyapps.io/spa_algorithm_demo_app/>
+The stable version is deployed here:
+<https://stephaneghozzi.shinyapps.io/spa_algorithm_demo_app/>.

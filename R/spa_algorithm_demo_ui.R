@@ -45,7 +45,8 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
       title = "Results",
 
       shiny::helpText(
-        "Approaches with Score 0 are not shown below."
+        "Approaches with both additive and multiplicative Scores 0 are not",
+        "shown below."
       ),
 
       DT::dataTableOutput("full_results_table")
@@ -54,6 +55,19 @@ spa_algorithm_demo_ui <- bslib::page_sidebar(
 
     bslib::nav_panel(
       title = "Advanced controls",
+
+      shiny::helpText(
+        "Set the way the country, disease, and objective scores are combined."
+      ),
+
+      shiny::radioButtons(
+        "combin_type",
+        "Score combination type",
+        choices = c("additive", "multiplicative"),
+        selected = "multiplicative"
+      ),
+
+      htmltools::hr(),
 
       shiny::helpText(
         "Set the threshold for the Score above which the approaches are",

@@ -20,6 +20,7 @@ feat_obj_score_col_name <- "Objective Score"
 disease_col_name <- "Disease"
 disease_score_col_name <- "Disease Score"
 country_col_name <- "COUNTRY"
+country_display_col_name <- "Country"
 context_col_name <- "Context type"
 context_value_col_name <- "Context value"
 context_inclusion_rule_col_name <- "Inclusion rule"
@@ -32,14 +33,19 @@ surv_capacitity_col_name <- "Surveillance Capacity D2.1)"
 
 context_surv_score_col_name <- "Score context"
 country_score_col_name <- "Country Score"
-combination_score_col_name <- "CDO Score" # "Country Disease Objective"
 natural_disaster_risk_score_col_name <- "Disaster Score"
 epidemic_risk_score_col_name <- "Epidemic Score"
 lab_capacitity_score_col_name <- "Lab Score"
 surv_capacitity_score_col_name <- "Surveillance Score"
 
-rank_col_name <- "Rank"
-final_score_col_name <- "Score"
+# CDO = "Country Disease Objective"
+mult_combination_score_col_name <- "CDO Score, multiplicative"
+add_combination_score_col_name <- "CDO Score, additive"
+
+mult_rank_col_name <- "Rank, multiplicative"
+mult_score_col_name <- "Score, multiplicative"
+add_rank_col_name <- "Rank, additive"
+add_score_col_name <- "Score, additive"
 
 # Default settings for scores
 
