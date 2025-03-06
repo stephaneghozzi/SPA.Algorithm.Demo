@@ -96,6 +96,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
       dplyr::filter(.data[[score_col_name]] > 0)
   })
 
+  # Optimal approaches
   ranked_approaches_results <- shiny::reactive({
     surv_scores_display() |>
       dplyr::filter(
@@ -105,6 +106,27 @@ spa_algorithm_demo_server <- function(input, output, session) {
       unique()
   })
 
+  # Add summary for each displayed approach
+  optimal_approaches_table <- shiny::reactive({
+    ranked_approaches_results() |>
+      dplyr::left_join(
+        spa_individual_scores$feat_obj_surv_score,
+        by = surveillance_approach_col_name
+      ) |>
+      dplyr::filter(
+        .data[[feat_obj_col_name]] %in% input$features_objectives
+      ) |>
+      dplyr::group_by(dplyr::pick({{ surveillance_approach_col_name }})) |>
+      dplyr::summarise(
+        Summary = summarises_approach_adequacy(
+          .data[[feat_obj_col_name]],
+          .data[[feat_obj_score_col_name]],
+          .data[[surveillance_approach_col_name]]
+        ),
+        .groups = "drop"
+      )
+  })
+
   # Tables
   headerCallback <- c(
     "function(thead, data, start, end, display){",
@@ -112,9 +134,10 @@ spa_algorithm_demo_server <- function(input, output, session) {
     "}"
   )
 
+  # Optimal approaches
   output$optimal_approaches_table <- DT::renderDT({
     DT::datatable(
-      ranked_approaches_results(),
+      optimal_approaches_table(),
       rownames = FALSE,
       class = "cell-border stripe",
       options = list(
