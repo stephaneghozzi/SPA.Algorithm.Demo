@@ -39,13 +39,10 @@ lab_capacitity_score_col_name <- "Lab Score"
 surv_capacitity_score_col_name <- "Surveillance Score"
 
 # CDO = "Country Disease Objective"
-mult_combination_score_col_name <- "CDO Score, multiplicative"
-add_combination_score_col_name <- "CDO Score, additive"
+combination_score_col_name <- "CDO Score"
 
-mult_rank_col_name <- "Rank, multiplicative"
-mult_score_col_name <- "Score, multiplicative"
-add_rank_col_name <- "Rank, additive"
-add_score_col_name <- "Score, additive"
+rank_col_name <- "Rank"
+score_col_name <- "Score"
 
 # Default settings for scores
 

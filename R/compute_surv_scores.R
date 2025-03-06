@@ -25,11 +25,8 @@ compute_surv_scores <- function(specific_scores, score_weights) {
       )
     ) |>
     dplyr::summarize(
-      "{mult_combination_score_col_name}" := compute_score_individual(
-        score_value, weight_value, "multiplicative"
-      ),
-      "{add_combination_score_col_name}" := compute_score_individual(
-        score_value, weight_value, "additive"
+      "{combination_score_col_name}" := compute_score_individual(
+        score_value, weight_value
       ),
       .groups = "drop"
     )
@@ -39,18 +36,11 @@ compute_surv_scores <- function(specific_scores, score_weights) {
       dplyr::across(dplyr::all_of(surveillance_approach_col_name))
     ) |>
     dplyr::summarize(
-      "{mult_score_col_name}" := mean(.data[[mult_combination_score_col_name]]),
-      "{add_score_col_name}" := mean(.data[[add_combination_score_col_name]]),
+      "{score_col_name}" := mean(.data[[combination_score_col_name]]),
       .groups = "drop"
     ) |>
     dplyr::mutate(
-      "{mult_rank_col_name}" := rank(
-        -.data[[mult_score_col_name]],
-        ties.method = "min"
-      ),
-      "{add_rank_col_name}" := rank(
-        -.data[[add_score_col_name]],
-        ties.method = "min")
+      "{rank_col_name}" := rank(-.data[[score_col_name]], ties.method = "min")
     ) |>
     dplyr::right_join(specific_scores_combined) |>
     dplyr::right_join(specific_scores)

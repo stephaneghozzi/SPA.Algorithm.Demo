@@ -68,24 +68,14 @@ spa_algorithm_demo_server <- function(input, output, session) {
     compute_surv_scores(specific_scores(), score_weights_input())
   })
 
-  final_score_col_name <- shiny::reactive({
-    switch(
-      input$combin_type,
-      additive = add_score_col_name,
-      multiplicative = mult_score_col_name
-    )
-
-  })
 
   surv_scores_display <- shiny::reactive({
     surv_scores() |>
-      dplyr::relocate(
+      dplyr::select(
         dplyr::all_of(
           c(
             surveillance_approach_col_name,
-            add_rank_col_name, add_score_col_name,
-            mult_rank_col_name, mult_score_col_name,
-            add_combination_score_col_name, mult_combination_score_col_name,
+            score_col_name, combination_score_col_name,
             country_col_name, country_score_col_name,
             natural_disaster_risk_score_col_name,
             epidemic_risk_score_col_name, lab_capacitity_score_col_name,
@@ -98,20 +88,18 @@ spa_algorithm_demo_server <- function(input, output, session) {
       dplyr::rename("{country_display_col_name}" := country_col_name) |>
       dplyr::arrange(
         surveillance_approach_col_name,
-        dplyr::desc(.data[[final_score_col_name()]])
+        dplyr::desc(.data[[score_col_name]])
       ) |>
       dplyr::mutate(
         dplyr::across(dplyr::where(is.numeric), ~ signif(.x, 2))
       ) |>
-      dplyr::filter(
-        .data[[add_score_col_name]] > 0 | .data[[mult_score_col_name]] > 0
-      )
+      dplyr::filter(.data[[score_col_name]] > 0)
   })
 
   ranked_approaches_results <- shiny::reactive({
     surv_scores_display() |>
       dplyr::filter(
-        .data[[final_score_col_name()]] >= input$display_score_threshold
+        .data[[score_col_name]] >= input$display_score_threshold
       ) |>
       dplyr::select({{ surveillance_approach_col_name }}) |>
       unique()
@@ -164,11 +152,7 @@ spa_algorithm_demo_server <- function(input, output, session) {
         `border-right` = "solid 1px"
       ) |>
       DT::formatStyle(
-        mult_score_col_name,
-        `border-right` = "solid 2px"
-      ) |>
-      DT::formatStyle(
-        c("Country", disease_col_name, feat_obj_col_name),
+        c(country_display_col_name, disease_col_name, feat_obj_col_name),
         `border-left` = "solid 2px"
       ) |>
       DT::formatStyle(
