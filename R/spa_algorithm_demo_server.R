@@ -124,7 +124,8 @@ spa_algorithm_demo_server <- function(input, output, session) {
           .data[[surveillance_approach_col_name]]
         ),
         .groups = "drop"
-      )
+      ) |>
+      dplyr::select(-Summary)
   })
 
   # Tables
